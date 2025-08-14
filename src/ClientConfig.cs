@@ -1,6 +1,4 @@
-﻿using Server.src;
-
-namespace Server
+﻿namespace Server.src
 {
     public class ClientConfig
     {

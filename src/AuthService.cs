@@ -19,22 +19,22 @@ namespace Server.src
         }
 
 
-        public string ClientNameAuthorization(IClient client)
+        public async Task<string> ClientNameAuthorizationAsync(IClient client)
         {
             while (true)
             {
-                var name = GetClientInput(client);
+                var name = await GetClientInputAsync(client);
                 if (IsValidName(name))
                 {
                     return name;
                 }
             }
         }
-        public string? ClientPasswordAuthorization(IClient client)
+        public async Task<string?> ClientPasswordAuthorizationAsync(IClient client)
         {
             for (int attempt = 0; attempt < _passwordAttempts; attempt++)
             {
-                var password = GetClientInput(client);
+                var password = await GetClientInputAsync(client);
                 if (IsValidPassword(password))
                 {
                     return password;
@@ -44,11 +44,11 @@ namespace Server.src
         }
 
 
-        private string GetClientInput(IClient client)
+        private async Task<string> GetClientInputAsync(IClient client)
         {
             while (true)
             {
-                var name = client.Read().Result;
+                var name = await client.Read();
                 if (!string.IsNullOrEmpty(name))
                 {
                     return name;
@@ -56,7 +56,7 @@ namespace Server.src
             }
         }
 
-        public bool IsValidName(string name)
+        private bool IsValidName(string name)
         {
             name = FixWhitespaceInString(name);
 
@@ -74,11 +74,7 @@ namespace Server.src
         }        
         private bool IsValidPassword(string password)
         {
-            if (string.IsNullOrEmpty(password))
-            {
-                return false;
-            }
-            else if (password.Length < _minPasswordLength || password.Length > _maxPasswordLength)
+            if (password.Length < _minPasswordLength || password.Length > _maxPasswordLength)
             {
                 return false;
             }

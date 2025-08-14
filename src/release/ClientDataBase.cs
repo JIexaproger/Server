@@ -25,5 +25,15 @@ namespace Server.src.release
             _clients.TryGetValue(clientName, out var clientConfig);
             return clientConfig;
         }
+
+        public bool UpdateClient(string clientName, IClient client, int id, string? password = null)
+        {
+            if (_clients.ContainsKey(clientName))
+            {
+                _clients[clientName] = new ClientConfig(client, id, password);
+                return true;
+            }
+            return false;
+        }
     }
 }

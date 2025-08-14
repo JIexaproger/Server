@@ -19,9 +19,13 @@ namespace Server.src
         public void ClientIsNoInDataBase(string clientName, int clientId, string? password = null);
 
         // Client events
-        public void ClientConnected();
-        public void ClientDisconnected();
+        public void ClientConnected(string clientName);
+        public void ClientDisconnected(string clientName);
+        public void ClientReconnected(string clientName);
 
         public void HandleClientError(Exception error);
+
+        public void ClientPasswordIsIncorrect(string clientName);
+        public void ClientPasswordIsCorrect(string clientName, string password);
     }
 }

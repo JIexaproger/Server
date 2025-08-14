@@ -28,30 +28,34 @@ namespace Server.src.release
             System.Console.WriteLine("Ошибка при принятии подключения клиента.");
         }
 
-        public void ClientIsAlreadyInDataBase(string name, int id, string? info)
+        public void ClientIsAlreadyInDataBase(string clientName, int id, string? password)
         {
-            Console.WriteLine($"Клиент уже есть в базе данных: Name=\"{name}\", Id=\"{id}\", Info=\"{info}\"");
+            Console.WriteLine($"Клиент уже есть в базе данных: Name=\"{clientName}\", Id=\"{id}\", Info=\"{password}\"");
         }
-        public void ClientIsNoInDataBase(string name, int id, string? info)
+        public void ClientIsNoInDataBase(string clientName, int id, string? password)
         {
-            Console.WriteLine($"Клиента нет в базе данных: Name=\"{name}\", Id=\"{id}\", Info=\"{info}\"");
+            Console.WriteLine($"Клиента нет в базе данных: Name=\"{clientName}\", Id=\"{id}\", Info=\"{password}\"");
         }
-        public void ClientAddedToDataBase(string name, int id, string? info)
+        public void ClientAddedToDataBase(string clientName, int id, string? password)
         {
-            Console.WriteLine($"Клиент добавлен в базу данных: Name=\"{name}\", Id=\"{id}\", Info=\"{info}\"");
+            Console.WriteLine($"Клиент добавлен в базу данных: Name=\"{clientName}\", Id=\"{id}\", Info=\"{password}\"");
         }
-        public void ClientRemoveFromDataBase(string name, int id, string? info)
+        public void ClientRemoveFromDataBase(string clientName, int id, string? password)
         {
-            Console.WriteLine($"Клиент удалён из базы данных: Name=\"{name}\", Id=\"{id}\", Info=\"{info}\"");
+            Console.WriteLine($"Клиент удалён из базы данных: Name=\"{clientName}\", Id=\"{id}\", Info=\"{password}\"");
         }
 
-        public void ClientConnected()
+        public void ClientConnected(string clientName)
         {
-            Console.WriteLine("Клиент подключился.");
+            Console.WriteLine($"Клиент \"{clientName}\" подключился.");
         }
-        public void ClientDisconnected()
+        public void ClientDisconnected(string clientName)
         {
-            Console.WriteLine("Клиент отключился.");
+            Console.WriteLine($"Клиент \"{clientName}\" отключился.");
+        }
+        public void ClientReconnected(string clientName)
+        {
+            Console.WriteLine($"Клиент \"{clientName}\" переподключился");
         }
 
         public void HandleClientError(Exception error)
